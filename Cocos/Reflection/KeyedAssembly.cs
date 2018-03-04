@@ -7,6 +7,7 @@ using System.Text;
 
 namespace Cocos.Reflection
 {
+    // TODO: Extract all key items to an abstract "KeyedItem<T>" class with lambda key retrieving functionality.
     [DebuggerDisplay("{Key}: {Assembly}")]
     public class KeyedAssembly
     {
