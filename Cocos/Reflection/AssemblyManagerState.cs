@@ -28,6 +28,10 @@ namespace Cocos.Reflection
             appDomain.AssemblyLoad += AppDomain_AssemblyLoad;
             initLoaderList.Add(appDomain.GetAssemblies().Select(KeyedAssembly.FromAssembly));
 
+            Console.WriteLine(String.Join("\r\n", initLoaderList.Select(x => x.Assembly.FullName)));
+            Console.WriteLine("Count: {0}", initLoaderList.Count);
+            Console.ReadLine();
+
             throw new NotImplementedException("Hier weitermachen!");
             // Anstelle ObservableDict lieber eine ObservableKeyedCollection nutzen!
         }
@@ -35,7 +39,6 @@ namespace Cocos.Reflection
         protected virtual void AppDomain_AssemblyLoad(object sender, AssemblyLoadEventArgs args)
         {
             if (!isInitialized) initLoaderList?.Add(args.LoadedAssembly);
-            Console.WriteLine(args.LoadedAssembly.FullName);
         }
     }
 }

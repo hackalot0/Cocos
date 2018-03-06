@@ -1,0 +1,5 @@
+AssemblyManager:
+	- Implement some logic for tracking all loaded assemblies and their types.
+
+Cocos:
+	- Finish up the core components.
