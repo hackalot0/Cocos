@@ -17,10 +17,6 @@ namespace Cocos.Reflection
         public static implicit operator KeyedAssembly(Assembly assembly) => new KeyedAssembly(assembly);
         public static implicit operator Assembly(KeyedAssembly keyedAssembly) => keyedAssembly.Assembly;
 
-        private static Guid GetKey(Assembly assembly)
-        {
-            AssemblyName an = assembly.GetName();
-            return string.Join("|", an.FullName, an.Name).GetBytes().GetHashCode<MD5>().GetGuid();
-        }
+        private static Guid GetKey(Assembly assembly) => assembly.SafeGetName().GetBytes().GetHashCode<MD5>().GetGuid();
     }
 }

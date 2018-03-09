@@ -2,7 +2,7 @@
 
 namespace Cocos
 {
-    public static class CollectionExtension
+    public static class ICollectionExtension
     {
         public static int Add<T>(this ICollection<T> col, IEnumerable<T> items)
         {

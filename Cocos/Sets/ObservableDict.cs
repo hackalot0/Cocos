@@ -22,42 +22,15 @@ namespace Cocos.Sets
 
         private IDictionary<TKey, TValue> baseDict;
 
-        public ObservableDict()
-        {
-            baseDict = new Dictionary<TKey, TValue>();
-        }
-        public ObservableDict(int capacity)
-        {
-            baseDict = new Dictionary<TKey, TValue>(capacity);
-        }
-        public ObservableDict(int capacity, IEqualityComparer<TKey> comparer)
-        {
-            baseDict = new Dictionary<TKey, TValue>(capacity, comparer);
-        }
-        public ObservableDict(IDictionary<TKey, TValue> dictionary)
-        {
-            baseDict = new Dictionary<TKey, TValue>(dictionary);
-        }
-        public ObservableDict(IDictionary<TKey, TValue> dictionary, IEqualityComparer<TKey> comparer)
-        {
-            baseDict = new Dictionary<TKey, TValue>(dictionary, comparer);
-        }
-        public ObservableDict(IEnumerable<KeyValuePair<TKey, TValue>> collection)
-        {
-            baseDict = new Dictionary<TKey, TValue>(collection);
-        }
-        public ObservableDict(IEnumerable<KeyValuePair<TKey, TValue>> collection, IEqualityComparer<TKey> comparer)
-        {
-            baseDict = new Dictionary<TKey, TValue>(collection, comparer);
-        }
-        public ObservableDict(IEqualityComparer<TKey> comparer)
-        {
-            baseDict = new Dictionary<TKey, TValue>(comparer);
-        }
-        protected ObservableDict(SerializationInfo info, StreamingContext context)
-        {
-            baseDict = (Dictionary<TKey, TValue>)info.GetValue("baseDict", typeof(Dictionary<TKey, TValue>));
-        }
+        public ObservableDict() => baseDict = new Dictionary<TKey, TValue>();
+        public ObservableDict(int capacity) => baseDict = new Dictionary<TKey, TValue>(capacity);
+        public ObservableDict(int capacity, IEqualityComparer<TKey> comparer) => baseDict = new Dictionary<TKey, TValue>(capacity, comparer);
+        public ObservableDict(IDictionary<TKey, TValue> dictionary) => baseDict = new Dictionary<TKey, TValue>(dictionary);
+        public ObservableDict(IDictionary<TKey, TValue> dictionary, IEqualityComparer<TKey> comparer) => baseDict = new Dictionary<TKey, TValue>(dictionary, comparer);
+        public ObservableDict(IEnumerable<KeyValuePair<TKey, TValue>> collection) => baseDict = new Dictionary<TKey, TValue>(collection);
+        public ObservableDict(IEnumerable<KeyValuePair<TKey, TValue>> collection, IEqualityComparer<TKey> comparer) => baseDict = new Dictionary<TKey, TValue>(collection, comparer);
+        public ObservableDict(IEqualityComparer<TKey> comparer) => baseDict = new Dictionary<TKey, TValue>(comparer);
+        protected ObservableDict(SerializationInfo info, StreamingContext context) => baseDict = (Dictionary<TKey, TValue>)info.GetValue("baseDict", typeof(Dictionary<TKey, TValue>));
 
         public void Clear()
         {

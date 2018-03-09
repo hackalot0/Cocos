@@ -1,44 +1,34 @@
-﻿using Cocos.Sets;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace Cocos.Reflection
 {
-    public class AssemblyManagerState
+    public class AssemblyManagerState : StateBase
     {
         public AppDomain AppDomain => appDomain;
-        public ObservableDict<Guid, KeyedAssembly> Registry => registry;
+        public KeyedAssemblySet KnownAssemblies => knownAssemblies;
 
-        private bool isInitialized;
         private AppDomain appDomain;
-        private List<KeyedAssembly> initLoaderList;
-        private ObservableDict<Guid, KeyedAssembly> registry;
+        private KeyedAssemblySet knownAssemblies;
 
-        public AssemblyManagerState(AppDomain appDomain)
-        {
-            this.appDomain = appDomain;
-            registry = new ObservableDict<Guid, KeyedAssembly>();
-            Initialize();
-        }
+        public AssemblyManagerState(AppDomain appDomain) => this.appDomain = appDomain;
 
-        protected virtual void Initialize()
+        protected override void Init()
         {
-            initLoaderList = new List<KeyedAssembly>();
+            knownAssemblies = new KeyedAssemblySet();
             appDomain.AssemblyLoad += AppDomain_AssemblyLoad;
-            initLoaderList.Add(appDomain.GetAssemblies().Select(KeyedAssembly.FromAssembly));
-
-            Console.WriteLine(String.Join("\r\n", initLoaderList.Select(x => x.Assembly.FullName)));
-            Console.WriteLine("Count: {0}", initLoaderList.Count);
-            Console.ReadLine();
-
-            throw new NotImplementedException("Hier weitermachen!");
-            // Anstelle ObservableDict lieber eine ObservableKeyedCollection nutzen!
+            knownAssemblies.Add(appDomain.GetAssemblies().Select(KeyedAssembly.FromAssembly));
         }
-
-        protected virtual void AppDomain_AssemblyLoad(object sender, AssemblyLoadEventArgs args)
+        protected override void Dispose(bool managed)
         {
-            if (!isInitialized) initLoaderList?.Add(args.LoadedAssembly);
+            appDomain.AssemblyLoad -= AppDomain_AssemblyLoad;
+            knownAssemblies?.Clear();
+            appDomain = null;
+            knownAssemblies = null;
+            base.Dispose(managed);
         }
+
+        protected virtual void AppDomain_AssemblyLoad(object sender, AssemblyLoadEventArgs args) { knownAssemblies.Add(args.LoadedAssembly); }
     }
 }

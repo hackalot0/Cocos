@@ -1,44 +1,34 @@
-﻿using Cocos.Sets;
-using System;
-using System.Collections.Generic;
+﻿using System;
 
 namespace Cocos.Reflection
 {
-    public class AssemblyManager
+    public class AssemblyManager : Disposable
     {
-        #region Static stuff
-        private static ObservableDict<AppDomain, AssemblyManagerState> states;
-        private static DictObserver<AppDomain, AssemblyManagerState> stateObserver;
+        public static AssemblyManagerStateDict States => states;
+        public AssemblyManagerState State => state;
 
-        static AssemblyManager()
-        {
-            stateObserver = new DictObserver<AppDomain, AssemblyManagerState>(states = new ObservableDict<AppDomain, AssemblyManagerState>())
-            {
-                ItemAddedAction = States_Added,
-                ItemRemovedAction = States_Removed,
-                CollectionResetAction = States_Cleared,
-            };
-        }
-
-        private static void States_Added(IDictionary<AppDomain, AssemblyManagerState> dict, AppDomain key)
-        {
-        }
-        private static void States_Removed(IDictionary<AppDomain, AssemblyManagerState> dict, AppDomain key)
-        {
-        }
-        private static void States_Cleared(IDictionary<AppDomain, AssemblyManagerState> dict)
-        {
-        }
-        #endregion
-
+        private static AssemblyManagerStateDict states;
         private AssemblyManagerState state;
+        private object locker = new object();
 
-        public AssemblyManager() { Initialize(); }
+        public AssemblyManager() => Initialize();
 
         protected virtual void Initialize()
         {
+            lock (locker) if (states == null) states = new AssemblyManagerStateDict();
             AppDomain ad = AppDomain.CurrentDomain;
-            if (!states.TryGetValue(ad, out AssemblyManagerState state)) states.Add(ad, state = new AssemblyManagerState(ad));
+            if (!states.TryGetValue(ad, out state)) states.Add(ad, state = new AssemblyManagerState(ad));
+            state.BindingCount += 1;
+            state.Initialize();
+        }
+
+        protected override void Dispose(bool managed)
+        {
+            if (state.BindingCount == 1)
+            {
+                states.Remove(state.AppDomain);
+                state.TryDispose();
+            }
         }
     }
 }

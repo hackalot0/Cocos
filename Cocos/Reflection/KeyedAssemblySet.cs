@@ -7,37 +7,13 @@ using System.Runtime.Serialization;
 namespace Cocos.Reflection
 {
     [Serializable]
-    public class KeyedAssemblySet : ObservableKeyedSet<Guid, Assembly>
+    public class KeyedAssemblySet : ObservableKeyedSet<Guid, KeyedAssembly>
     {
-        public KeyedAssemblySet()
-        {
-        }
-        public KeyedAssemblySet(int capacity) : base(capacity)
-        {
-        }
-        public KeyedAssemblySet(IDictionary<Guid, Assembly> dictionary) : base(dictionary)
-        {
-        }
-        public KeyedAssemblySet(IEnumerable<KeyValuePair<Guid, Assembly>> collection) : base(collection)
-        {
-        }
-        public KeyedAssemblySet(IEqualityComparer<Guid> comparer) : base(comparer)
-        {
-        }
-        public KeyedAssemblySet(Func<Assembly, Guid> keyRetriever) : base(keyRetriever)
-        {
-        }
-        public KeyedAssemblySet(int capacity, IEqualityComparer<Guid> comparer) : base(capacity, comparer)
-        {
-        }
-        public KeyedAssemblySet(IDictionary<Guid, Assembly> dictionary, IEqualityComparer<Guid> comparer) : base(dictionary, comparer)
-        {
-        }
-        public KeyedAssemblySet(IEnumerable<KeyValuePair<Guid, Assembly>> collection, IEqualityComparer<Guid> comparer) : base(collection, comparer)
-        {
-        }
-        protected KeyedAssemblySet(SerializationInfo info, StreamingContext context) : base(info, context)
-        {
-        }
+        public KeyedAssemblySet() { }
+        public KeyedAssemblySet(IEnumerable<Assembly> items) { items.ForEach(x => Add(x)); }
+        public KeyedAssemblySet(IEnumerable<KeyedAssembly> items) { items.ForEach(Add); }
+        protected KeyedAssemblySet(SerializationInfo info, StreamingContext context) : base(info, context) { }
+
+        protected override Guid GetKeyForItem(KeyedAssembly item) => item.Key;
     }
 }
