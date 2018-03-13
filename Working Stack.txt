@@ -1,5 +1,12 @@
+Threading-Namespace:
+	- Implement a namespace all around asynchronous operations and calls.
+Initializable:
+	- Implement the ability to switch either to initialize synchronously or async
+TypeManager:
+	- Some logic to create instances by template types and interfaces
+		- Support for generic types
+	- Implement some logic for tracking all loaded and requested types.
 AssemblyManager:
-	- Implement some logic for tracking all loaded assemblies and their types.
-
+	- Implement some logic for tracking all loaded assemblies.
 Cocos:
 	- Finish up the core components.

@@ -1,7 +1,6 @@
 ﻿using Cocos.Reflection;
 using System;
-using System.Linq;
-using System.Reflection;
+using System.Collections.Specialized;
 
 namespace Cocos.ConsoleTests
 {
@@ -10,9 +9,15 @@ namespace Cocos.ConsoleTests
         static void Main(string[] args)
         {
             AssemblyManager am = new AssemblyManager();
-            Random r = new Random();
-            Assembly a = am.State.KnownAssemblies.Values.ElementAt(r.Next(am.State.KnownAssemblies.Count));
-            TypeManager tm = a.GetTypeManager();
+        }
+
+        private static void AssemblyAdded(INotifyCollectionChanged source, KeyedAssembly item)
+        {
+            Console.WriteLine("Assembly added: {0}", item.Assembly.SafeGetName());
+        }
+        private static void AssemblyRemoved(INotifyCollectionChanged source, KeyedAssembly item)
+        {
+            Console.WriteLine("Assembly removed: {0}", item.Assembly.SafeGetName());
         }
     }
 }

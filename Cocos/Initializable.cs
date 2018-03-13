@@ -1,19 +1,42 @@
-﻿namespace Cocos
+﻿using System;
+using System.Threading;
+using System.Threading.Tasks;
+
+namespace Cocos
 {
     public abstract class Initializable : Disposable, IInitializable
     {
         public bool IsInitialized => isInitialized;
         public bool IsInitializing => isInitializing;
 
+        private bool initAsync;
         private bool isInitialized;
         private bool isInitializing;
+        private Thread initThread;
+
+
+        protected Initializable(bool initAsync) => this.initAsync = initAsync;
 
         public virtual void Initialize()
         {
             if (isInitializing || isInitialized) return;
             isInitializing = true;
-            try { Init(); } catch { isInitializing = false; throw; }
+
+            if (initAsync)
+            {
+
+            }
+            else
+            {
+                Init();
+            }
+
             isInitialized = !(isInitializing = false);
+        }
+
+        private void InitializationDone(Task _initTask)
+        {
+
         }
 
         protected abstract void Init();
