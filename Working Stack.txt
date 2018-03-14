@@ -1,7 +1,8 @@
-Threading-Namespace:
-	- Implement a namespace all around asynchronous operations and calls.
+Multitasking-Namespace:
+	- Try to get the most out of the "Task" class with an abstract management system around it.
+	- Implement a namespace all around asynchronous tasks and procedures.
 Initializable:
-	- Implement the ability to switch either to initialize synchronously or async
+	- Implement the ability to switch either to initialize synchronous or asynchronous
 TypeManager:
 	- Some logic to create instances by template types and interfaces
 		- Support for generic types

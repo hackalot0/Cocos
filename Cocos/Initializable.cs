@@ -1,5 +1,4 @@
-﻿using System;
-using System.Threading;
+﻿using System.Threading;
 using System.Threading.Tasks;
 
 namespace Cocos
@@ -12,10 +11,8 @@ namespace Cocos
         private bool initAsync;
         private bool isInitialized;
         private bool isInitializing;
-        private Thread initThread;
 
-
-        protected Initializable(bool initAsync) => this.initAsync = initAsync;
+        protected Initializable(bool initAsync = false) => this.initAsync = initAsync;
 
         public virtual void Initialize()
         {
