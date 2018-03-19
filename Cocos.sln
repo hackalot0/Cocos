@@ -14,7 +14,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GK.Cocos", "GK.Cocos\GK.Coc
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GK.Cocos.ConsoleTests", "GK.Cocos.ConsoleTests\GK.Cocos.ConsoleTests.csproj", "{BDD8830B-3DB3-4C16-8E4F-85259E08ABC9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GK.Cocos.Net", "GK.Cocos.Net\GK.Cocos.Net.csproj", "{F5083385-BC31-4B29-8A71-78D07ACCAAB9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GK.Cocos.Net", "GK.Cocos.Net\GK.Cocos.Net.csproj", "{2C5F452F-286E-4AD1-9A02-0B760CD48315}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -34,10 +34,10 @@ Global
 		{BDD8830B-3DB3-4C16-8E4F-85259E08ABC9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BDD8830B-3DB3-4C16-8E4F-85259E08ABC9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BDD8830B-3DB3-4C16-8E4F-85259E08ABC9}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F5083385-BC31-4B29-8A71-78D07ACCAAB9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F5083385-BC31-4B29-8A71-78D07ACCAAB9}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F5083385-BC31-4B29-8A71-78D07ACCAAB9}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F5083385-BC31-4B29-8A71-78D07ACCAAB9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2C5F452F-286E-4AD1-9A02-0B760CD48315}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2C5F452F-286E-4AD1-9A02-0B760CD48315}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2C5F452F-286E-4AD1-9A02-0B760CD48315}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2C5F452F-286E-4AD1-9A02-0B760CD48315}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
