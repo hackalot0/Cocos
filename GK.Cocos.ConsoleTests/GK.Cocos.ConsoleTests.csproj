@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\GK.Cocos\GK.Cocos.csproj" />
+    <ProjectReference Include="..\GK\GK.csproj" />
+  </ItemGroup>
+
+</Project>
