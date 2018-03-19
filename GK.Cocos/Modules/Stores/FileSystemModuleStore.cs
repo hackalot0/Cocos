@@ -16,6 +16,20 @@ namespace GK.Cocos.Modules.Stores
 
         protected override void Init()
         {
+            directory.Refresh();
+            if (!directory.Exists)
+            {
+                directory.Create();
+                directory.Refresh();
+            }
+            else
+            {
+                Refresh_Files();
+            }
+        }
+
+        protected void Refresh_Files()
+        {
 
         }
     }

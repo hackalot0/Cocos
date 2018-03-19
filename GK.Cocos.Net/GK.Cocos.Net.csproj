@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\GK.Cocos\GK.Cocos.csproj" />
+    <ProjectReference Include="..\GK\GK.csproj" />
+  </ItemGroup>
+
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="xCOPY $(ProjectDir)$(OutDir). $(ProjectDir)..\GK.Cocos.ConsoleTests\bin\Debug\netcoreapp2.0\Modules\. /Y" />
+  </Target>
+
+</Project>
