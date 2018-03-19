@@ -35,7 +35,7 @@ namespace GK.Sets
         public void Clear()
         {
             baseDict.Clear();
-            DictCleared();
+            Cleared();
         }
         public bool ContainsKey(TKey key) => baseDict.ContainsKey(key);
         public bool Contains(KeyValuePair<TKey, TValue> item) => baseDict.Contains(item);
@@ -71,7 +71,7 @@ namespace GK.Sets
 
         protected virtual void ItemAdded(TKey key) => OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, key));
         protected virtual void ItemRemoved(TKey key) => OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove, key));
-        protected virtual void DictCleared() => OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
+        protected virtual void Cleared() => OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
 
         protected virtual void OnCollectionChanged(NotifyCollectionChangedEventArgs e) => CollectionChanged?.Invoke(this, e);
     }

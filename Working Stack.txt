@@ -1,3 +1,8 @@
+ModuleManager:
+	- Implement a way to specify where the module manager should look for modules.
+	- Handle all assembly and module loading for the runtime.
+CocosRuntime:
+	- Add fundamental beginnings to the heart of cocos, the "CocosRuntime" class
 TypeManager:
 	- Some logic to create instances by template types and interfaces
 		- Support for generic types

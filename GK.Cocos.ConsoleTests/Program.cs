@@ -1,5 +1,4 @@
-﻿using GK.Reflection;
-using System;
+﻿using System;
 
 namespace GK.Cocos.ConsoleTests
 {
