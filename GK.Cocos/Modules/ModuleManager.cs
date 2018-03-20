@@ -4,7 +4,7 @@ using GK.Sets;
 
 namespace GK.Cocos.Modules
 {
-    public class ModuleManager : CocosRuntimeManager
+    public class ModuleManager : CocosManager
     {
         public ModuleStoreSet ModuleStores => moduleStores;
         public AssemblyManager AssemblyManager => assemblyManager;
@@ -21,7 +21,7 @@ namespace GK.Cocos.Modules
             assemblyManager.Initialize();
             assemblyManagerObserver = assemblyManager.State.KnownAssemblies.Observe<KeyedAssembly>(Assembly_Added, Assembly_Removed);
 
-            moduleStoreObserver = (moduleStores = new ModuleStoreSet()).Observe<ModuleStore>(ModuleStore_Added, ModuleStore_Removed);
+            moduleStoreObserver = (moduleStores = new ModuleStoreSet() { ParentModuleManager = this }).Observe<ModuleStore>(ModuleStore_Added, ModuleStore_Removed);
         }
 
         private void Assembly_Added(INotifyCollectionChanged itemSet, KeyedAssembly item)
@@ -33,6 +33,7 @@ namespace GK.Cocos.Modules
 
         private void ModuleStore_Added(INotifyCollectionChanged itemSet, ModuleStore item)
         {
+            item.ParentStoreSet = moduleStores;
             if (!item.IsInitialized) item.Initialize();
 
         }

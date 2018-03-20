@@ -4,7 +4,7 @@ using System.Text;
 
 namespace GK.Cocos
 {
-    public abstract class CocosRuntimeManager : Initializable
+    public abstract class CocosManager : Initializable
     {
 
     }
