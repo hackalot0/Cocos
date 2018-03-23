@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GK.Threading;
+using System;
 using System.Threading;
 
 namespace GK
@@ -13,18 +14,14 @@ namespace GK
         private bool initAsync;
         private bool isInitialized;
         private bool isInitializing;
-        private Thread initThread;
+        private Worker initWorker;
 
         public virtual void Initialize(bool initAsync = false)
         {
             if (isInitializing || isInitialized) return;
             isInitializing = true;
             
-            if (this.initAsync = initAsync)
-            {
-                initThread = new Thread(Initializer) { Name = string.Format("Init - {0}", GetType().FullName) };
-                initThread.Start();
-            }
+            if (this.initAsync = initAsync) (initWorker = TaskWorker.Create(Initializer)).Start();
             else Initializer();
         }
 
@@ -32,11 +29,12 @@ namespace GK
         protected override void Dispose(bool managed) => isInitialized = false;
         protected virtual void OnInitialized(EventArgs e) => Initialized?.Invoke(this, e);
 
-        private void Initializer()
+        private void Initializer(ActionState state = null)
         {
             Init();
             isInitialized = !(isInitializing = false);
             OnInitialized(EventArgs.Empty);
+            if (state != null) state.IsFinished = true;
         }
     }
 }

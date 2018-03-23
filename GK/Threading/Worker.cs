@@ -1,6 +1,8 @@
 ﻿using GK.Events;
 using GK.Sets;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace GK.Threading
 {
@@ -21,12 +23,11 @@ namespace GK.Threading
         public virtual WorkerState WorkerState { get => workerState; protected set => EventHelper.HandleChange(ref workerState, ref value, OnWorkerStateChanged); }
 
         private WorkerState workerState;
-        private object locker = new object();
         private static ObservableSet<Worker> workers;
 
+        static Worker() => workers = new ObservableSet<Worker>();
         public Worker()
         {
-            lock (locker) if (workers == null) workers = new ObservableSet<Worker>();
             workers.Add(this);
             WorkerState = WorkerState.Creating;
             Initialize();
@@ -93,6 +94,25 @@ namespace GK.Threading
                 case WorkerState.Stopping: return InternalWait(timeout);
             }
             return true;
+        }
+
+        protected static T Create<T>(WorkerEventHandler action) where T : Worker, new()
+        {
+            T r = new T();
+            r.Actions += action;
+            return r;
+        }
+        public static void StopAll() => workers.ToList().ForEach(x => x.Stop());
+        public static void DisposeAll()
+        {
+            List<Exception> errors = new List<Exception>();
+            foreach (Worker worker in workers.ToList())
+            {
+                try { worker.Dispose(); }
+                catch (Exception error) { errors.Add(error); }
+            }
+            if (errors.Count == 1) throw errors[0];
+            if (errors.Count > 1) throw new AggregateException(errors);
         }
 
         protected virtual void OnWorkerStateChanged(ChangeEventArgs<WorkerState> e) => WorkerStateChanged?.Invoke(this, e);

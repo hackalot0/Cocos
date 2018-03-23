@@ -9,8 +9,8 @@ namespace GK.Cocos.ConsoleTests
     {
         static void Main(string[] args)
         {
-            //Test0();
-            Test1();
+            Test0();
+            //Test1();
         }
 
         private static void Test1()

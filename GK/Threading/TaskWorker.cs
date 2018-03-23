@@ -11,6 +11,8 @@ namespace GK.Threading
 
         private Task task;
 
+        public static TaskWorker Create(WorkerEventHandler action) => Create<TaskWorker>(action);
+
         protected override void Initialize()
         {
             task = new Task(TaskProcessor);
@@ -42,7 +44,11 @@ namespace GK.Threading
                                 if (WaitForAction) Thread.Sleep(1);
                                 else Stop();
                             }
-                            else weh.Invoke(ActionState);
+                            else
+                            {
+                                weh.Invoke(ActionState);
+                                if (ActionState.IsFinished) Stop();
+                            }
                         }
                         catch (Exception error)
                         {
