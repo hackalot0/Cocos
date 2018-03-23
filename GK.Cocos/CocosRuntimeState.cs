@@ -1,7 +1,6 @@
 ﻿using GK.Cocos.Modules;
 using GK.Cocos.Modules.Stores;
 using System;
-using System.Collections.Generic;
 using System.IO;
 
 namespace GK.Cocos

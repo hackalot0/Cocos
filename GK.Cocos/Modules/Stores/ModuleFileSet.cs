@@ -19,6 +19,6 @@ namespace GK.Cocos.Modules.Stores
         public ModuleFileSet(IEnumerable<KeyValuePair<Guid, ModuleFile>> collection, IEqualityComparer<Guid> comparer) : base(collection, comparer) { }
         protected ModuleFileSet(SerializationInfo info, StreamingContext context) : base(info, context) { }
 
-        protected override Guid GetKeyForItem(ModuleFile item) => item.Key;
+        protected override Guid GetKeyForItem(ModuleFile item) => item.ID;
     }
 }

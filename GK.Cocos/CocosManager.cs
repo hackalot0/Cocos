@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace GK.Cocos
+﻿namespace GK.Cocos
 {
     public abstract class CocosManager : Initializable
     {

@@ -1,18 +1,17 @@
-﻿using GK.Sets;
-using System;
+﻿using System;
 using System.IO;
 using System.Security.Cryptography;
 
 namespace GK.Cocos.Modules
 {
-    public class ModuleFile : KeyedItem<FileInfo>
+    public class ModuleFile
     {
+        public Guid ID => id;
         public FileInfo FileInfo => fileInfo;
+
+        private Guid id;
         private FileInfo fileInfo;
 
-        public ModuleFile() : base(GetKeyFor) { }
-        public ModuleFile(FileInfo item) : base(GetKeyFor, item) { }
-
-        private static Guid GetKeyFor(FileInfo arg) => arg == null ? Guid.Empty : string.Join(" | ", arg.FullName, arg.Length).GetBytes().GetHashCode<MD5>().GetGuid();
+        public ModuleFile(FileInfo fileInfo) => id = (this.fileInfo = fileInfo) == null ? Guid.Empty : string.Join(" | ", this.fileInfo.FullName, this.fileInfo.Length).GetBytes().GetHashCode<MD5>().GetGuid();
     }
 }

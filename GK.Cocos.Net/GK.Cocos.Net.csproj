@@ -10,7 +10,7 @@
   </ItemGroup>
 
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="xCOPY $(ProjectDir)$(OutDir). $(ProjectDir)..\GK.Cocos.ConsoleTests\bin\Debug\netcoreapp2.0\Modules\. /Y" />
+    <Exec Command="XCOPY $(TargetDir). $(ProjectDir)..\GK.Cocos.ConsoleTests\bin\$(ConfigurationName)\netcoreapp2.0\Modules\. /Y /I" />
   </Target>
 
 </Project>
