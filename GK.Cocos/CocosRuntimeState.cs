@@ -1,5 +1,5 @@
 ﻿using GK.Cocos.Modules;
-using GK.Cocos.Modules.Stores;
+using GK.Cocos.Modules.Providers;
 using System;
 using System.IO;
 
@@ -16,7 +16,7 @@ namespace GK.Cocos
             (singletonManager = new SingletonManager() { CocosRuntimeState = this }).Initialize();
             ModuleManager moduleManager = new ModuleManager();
             moduleManager.Initialize();
-            moduleManager.ModuleStores.Add(new FileSystemModuleStore(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Modules")));
+            moduleManager.ModuleProviders.Add(new LocalModuleProvider(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Modules")));
 
             singletonManager.Add(moduleManager);
         }

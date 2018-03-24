@@ -1,6 +1,5 @@
 ﻿using GK.Threading;
 using System;
-using System.Threading;
 
 namespace GK
 {

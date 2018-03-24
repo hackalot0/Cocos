@@ -1,58 +1,30 @@
-﻿using System;
-using System.Diagnostics;
-using System.Threading;
-using System.Threading.Tasks;
+﻿using GK.Reflection;
+using System;
 
 namespace GK.Cocos.ConsoleTests
 {
+    class A { }
+    class B : A { }
+    class C : B, IDisposable
+    {
+        public void Dispose()
+        {
+            throw new NotImplementedException();
+        }
+    }
+    class D : C { }
+
     class Program
     {
         static void Main(string[] args)
         {
+            TypeManager tm = new TypeManager(typeof(A).Assembly);
+            //var t0 = tm.Inherits<B>();
+            //var t1 = tm.InheritsOrEquals<B>();
+            //var t2 = tm.BaseTypesOf<D>();
+            //var t3 = tm.Implements<IDisposable>();
+
             Test0();
-            //Test1();
-        }
-
-        private static void Test1()
-        {
-            CancellationTokenSource cts = new CancellationTokenSource();
-            Task t = null;
-            try
-            {
-                using (t = new Task(Test_Task, cts.Token))
-                {
-                    t.Start();
-                    Console.ReadLine();
-                    cts.Cancel(true);
-                    Console.WriteLine("Cancellation requested!");
-                    Console.ReadLine();
-                    cts.Cancel();
-                    Console.WriteLine("Cancellation requested!");
-                    Console.ReadLine();
-                }
-
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-            }
-        }
-
-        private static void Test_Task()
-        {
-            try
-            {
-                Stopwatch s = Stopwatch.StartNew();
-                while (true)
-                {
-                    Console.WriteLine("Running thread since: {0}", s.Elapsed);
-                    Thread.Sleep(250);
-                }
-            }
-            catch (ThreadAbortException)
-            {
-                Console.WriteLine("ThreadAbortException catched!");
-            }
         }
 
         private static void Test0()

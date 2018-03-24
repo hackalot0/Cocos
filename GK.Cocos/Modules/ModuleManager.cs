@@ -1,43 +1,47 @@
-﻿using System.Collections.Specialized;
-using GK.Reflection;
+﻿using System.Collections.Generic;
+using System.Collections.Specialized;
+using GK.Cocos.Modules.Providers;
 using GK.Sets;
 
 namespace GK.Cocos.Modules
 {
     public class ModuleManager : CocosManager
     {
-        public ModuleStoreSet ModuleStores => moduleStores;
-        public AssemblyManager AssemblyManager => assemblyManager;
+        public ModuleProviderSet ModuleProviders => moduleProviders;
 
-        private ModuleStoreSet moduleStores;
-        private AssemblyManager assemblyManager;
-
-        private Observer<ModuleStore> moduleStoreObserver;
-        private Observer<KeyedAssembly> assemblyManagerObserver;
+        private ModuleProviderSet moduleProviders;
+        private Observer<ModuleProvider> moduleProvidersObserver;
+        private Dictionary<ModuleProvider, Observer<RuntimeModuleInfo>> moduleInfoObservers;
 
         protected override void Init()
         {
-            assemblyManager = new AssemblyManager();
-            assemblyManager.Initialize();
-            assemblyManagerObserver = assemblyManager.State.KnownAssemblies.Observe<KeyedAssembly>(Assembly_Added, Assembly_Removed);
+            moduleInfoObservers = new Dictionary<ModuleProvider, Observer<RuntimeModuleInfo>>();
+            moduleProvidersObserver = (moduleProviders = new ModuleProviderSet()).Observe<ModuleProvider>(ModuleProvider_Added, ModuleProvider_Removed);
 
-            moduleStoreObserver = (moduleStores = new ModuleStoreSet() { ParentModuleManager = this }).Observe<ModuleStore>(ModuleStore_Added, ModuleStore_Removed);
+            moduleProviders.Add(new AssemblyModuleProvider() { ModuleManager = this });
         }
 
-        private void Assembly_Added(INotifyCollectionChanged itemSet, KeyedAssembly item)
+        protected virtual void Refresh_Modules()
+        {
+
+        }
+
+        private void ModuleProvider_Added(INotifyCollectionChanged itemSet, ModuleProvider item)
+        {
+            moduleInfoObservers.Add(item, item.AvailableModules.Observe<RuntimeModuleInfo>(CocosModuleInfo_Added, CocosModuleInfo_Removed));
+            item.ModuleManager = this;
+        }
+        private void ModuleProvider_Removed(INotifyCollectionChanged itemSet, ModuleProvider item)
+        {
+            item.ModuleManager = null;
+            moduleInfoObservers[item].TryDispose();
+            moduleInfoObservers.Remove(item);
+        }
+
+        private void CocosModuleInfo_Added(INotifyCollectionChanged itemSet, RuntimeModuleInfo item)
         {
         }
-        private void Assembly_Removed(INotifyCollectionChanged itemSet, KeyedAssembly item)
-        {
-        }
-
-        private void ModuleStore_Added(INotifyCollectionChanged itemSet, ModuleStore item)
-        {
-            item.ParentStoreSet = moduleStores;
-            if (!item.IsInitialized) item.Initialize();
-
-        }
-        private void ModuleStore_Removed(INotifyCollectionChanged itemSet, ModuleStore item)
+        private void CocosModuleInfo_Removed(INotifyCollectionChanged itemSet, RuntimeModuleInfo item)
         {
         }
     }

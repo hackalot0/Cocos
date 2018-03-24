@@ -1,11 +1,6 @@
-﻿using System;
-
-namespace GK.Cocos.Modules
+﻿namespace GK.Cocos.Modules
 {
-    public class CocosModuleInfo
+    public class CocosModuleInfo : ModuleInfoBase, ICocosModuleInfo
     {
-        public virtual string Name { get; set; }
-        public virtual string Author { get; set; }
-        public virtual Version Version { get; set; }
     }
 }
