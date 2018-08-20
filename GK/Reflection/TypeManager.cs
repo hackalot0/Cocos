@@ -9,14 +9,11 @@ namespace GK.Reflection
     public class TypeManager : Disposable
     {
         public Assembly Assembly => state.Assembly;
-        public static TypeManagerStateDict States => states;
+        public static TypeManagerStateDict States { get; private set; }
         public ObservableKeyedSet<Guid, Type> KnownTypes => state.KnownTypes;
 
         private TypeManagerState state;
-        private object locker = new object();
-        private static TypeManagerStateDict states;
-
-        private static Dictionary<Type, List<Type>> cache_GetInterfaces;
+        private readonly object locker = new object();
 
         public TypeManager(Assembly assembly) => Initialize(assembly);
 
@@ -24,8 +21,8 @@ namespace GK.Reflection
         {
             lock (locker)
             {
-                if (states == null) states = new TypeManagerStateDict();
-                if (!states.TryGetValue(assembly, out state)) states.Add(assembly, state = new TypeManagerState(assembly));
+                if (States == null) States = new TypeManagerStateDict();
+                if (!States.TryGetValue(assembly, out state)) States.Add(assembly, state = new TypeManagerState(assembly));
                 state.BindingCount += 1;
                 state.Initialize();
             }
@@ -43,7 +40,7 @@ namespace GK.Reflection
             {
                 if (state.BindingCount == 1)
                 {
-                    states.Remove(state.Assembly);
+                    States.Remove(state.Assembly);
                     state.TryDispose();
                 }
             }

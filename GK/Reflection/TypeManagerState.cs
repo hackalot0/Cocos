@@ -38,7 +38,7 @@ namespace GK.Reflection
 
         protected override void Init()
         {
-            knownTypes = new ObservableKeyedSet<Guid, Type>(assembly.GetTypes().AsParallel().ToDictionary(x => x.GetGuid());
+            knownTypes = new ObservableKeyedSet<Guid, Type>(assembly.GetTypes().AsParallel().ToDictionary(x => x.GetGuid()));
             cache = new TypeManagerCache();
         }
 

@@ -1,39 +1,42 @@
 ﻿using GK.Reflection;
 using GK.Sets;
-using System;
+using System.Linq;
 using System.Collections.Specialized;
-using System.Reflection;
 
 namespace GK.Cocos.Modules.Providers
 {
     public class AssemblyModuleProvider : ModuleProvider
     {
-        private AssemblyManager assemblyManager;
+        private LibraryManager libManager;
 
         public AssemblyModuleProvider()
         {
-            assemblyManager = new AssemblyManager();
-            assemblyManager.KnownAssemblies.Observe<Assembly>(Assembly_Added, Assembly_Removed);
+            libManager = new LibraryManager();
+            libManager.Initialize();
+            libManager.Libraries.Observe<Library>(Library_Added, Library_Removed);
         }
 
         public override void Refresh()
         {
-            throw new NotImplementedException();
+            foreach (Library lib in libManager.Libraries.Values.ToList())
+            {
+
+            }
         }
 
-        private void Assembly_Added(INotifyCollectionChanged source, Assembly item)
+        private void Library_Added(INotifyCollectionChanged source, Library item)
         {
-            CheckAssembly(item);
+            CheckLibrary(item);
         }
-        private void Assembly_Removed(INotifyCollectionChanged source, Assembly item)
+        private void Library_Removed(INotifyCollectionChanged source, Library item)
         {
         }
 
-        private void CheckAssembly(Assembly assembly)
+        private void CheckLibrary(Library lib)
         {
-            if (assembly != null) {
-                TypeManager tm = new TypeManager(assembly);
-                var tmp = tm.InheritsOrEquals<CocosModuleInfo>();
+            if (lib != null) {
+                TypeManager tm = new TypeManager(lib);
+                //var tmp = tm.InheritsOrEquals<CocosModuleInfo>();
             }
         }
     }
