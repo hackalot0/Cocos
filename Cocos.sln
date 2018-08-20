@@ -16,7 +16,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GK.Cocos.ConsoleTests", "GK
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GK.Cocos.Net", "GK.Cocos.Net\GK.Cocos.Net.csproj", "{2C5F452F-286E-4AD1-9A02-0B760CD48315}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Other Projects", "Other Projects", "{CF53C6A2-91DA-472F-9313-F9031859A9B2}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".NET Core", ".NET Core", "{653EA431-59D7-49B8-8EFC-D5D43BAA6EE4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -43,6 +43,12 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{F3A79D39-0ED8-4145-A9A0-EFF8693F04DD} = {653EA431-59D7-49B8-8EFC-D5D43BAA6EE4}
+		{CD467E3B-2F05-4137-8AB7-07C62D812C42} = {653EA431-59D7-49B8-8EFC-D5D43BAA6EE4}
+		{BDD8830B-3DB3-4C16-8E4F-85259E08ABC9} = {653EA431-59D7-49B8-8EFC-D5D43BAA6EE4}
+		{2C5F452F-286E-4AD1-9A02-0B760CD48315} = {653EA431-59D7-49B8-8EFC-D5D43BAA6EE4}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {048FB1C0-F552-4F42-BEF0-4972C9AF6AAF}
