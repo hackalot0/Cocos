@@ -1,2 +1,7 @@
+- Add some smart networking stuff
+	- Seperate the elementar things to allow a flexible app base
+		- Introduce behaviors
+		- Introduce adapters
+		- Introduce channels
+
 - Add some smart collections
-	- Add some smart events for items
