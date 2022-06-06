@@ -9,7 +9,7 @@
             public T? Item { get; set; }
         }
 
-        public class Change
+        public class Replace
         {
             public delegate void Event(Args args);
 
