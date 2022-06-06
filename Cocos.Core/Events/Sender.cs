@@ -1,4 +1,4 @@
-﻿namespace Cocos.Core
+﻿namespace Cocos.Core.Events
 {
     public class Sender
     {

@@ -1,0 +1,2 @@
+- Add some smart collections
+	- Add some smart events for items
