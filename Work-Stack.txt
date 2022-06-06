@@ -1,7 +1,15 @@
+- Add some smart reflection stuff
+
 - Add some smart networking stuff
+	- The main entrance to networking is going to be the Peer
+		- Every peer can have:
+			- multiple subscriptions each representing a networking group
+			- multiple services each representing a serving endpoint
+
 	- Seperate the elementar things to allow a flexible app base
 		- Introduce behaviors
 		- Introduce adapters
 		- Introduce channels
 
 - Add some smart collections
+	- Add observable Dictionary
