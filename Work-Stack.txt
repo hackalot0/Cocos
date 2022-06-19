@@ -6,7 +6,7 @@
 			- multiple subscriptions each representing a networking group
 			- multiple services each representing a serving endpoint
 
-	- Seperate the elementar things to allow a flexible app base
+	- Seperate the elementar things to allow a flexible app base for networking
 		- Introduce behaviors
-		- Introduce adapters
+		+ Introduce adapters
 		- Introduce channels
