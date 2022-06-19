@@ -7,14 +7,14 @@ namespace Cocos.Core.Networking
     {
         public class Behavior
         {
-            public class Set : ObservableSet<Behavior>
+            public class Set : Observable.Set<Behavior>
             {
 
             }
         }
         public class Adapter
         {
-            public class Set : ObservableSet<Adapter>
+            public class Set : Observable.Set<Adapter>
             {
 
             }
