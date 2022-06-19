@@ -10,16 +10,10 @@ namespace Cocos.Core.Sets
         public event Item<T>.Event? ItemRemoved;
         public event Item<T>.Replace.Event? ItemReplaced;
 
-        public Observable.Options Options { get; private set; }
+        public Observable.Options Options { get; } = new();
 
-        public ObservableSet()
-        {
-            Options = new();
-        }
-        public ObservableSet(IList<T> list) : base(list)
-        {
-            Options = new();
-        }
+        public ObservableSet() { }
+        public ObservableSet(IList<T> list) : base(list) { }
 
         protected virtual void OnCleared() => Cleared?.Invoke(new() { Sender = this });
         protected virtual void OnItemAdded(T item) => ItemAdded?.Invoke(new() { Sender = this, Item = item });

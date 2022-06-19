@@ -10,6 +10,3 @@
 		- Introduce behaviors
 		- Introduce adapters
 		- Introduce channels
-
-- Add some smart collections
-	- Add observable Dictionary
