@@ -4,7 +4,7 @@ namespace Cocos.Core
 {
     public static class Helper
     {
-        public static string GetPublicPropertyStrings(this object instance, params string[] additionalValues)
+        public static string GetPublicPropertyStrings(object instance, params string[] additionalValues)
         {
             var vals = new List<string>();
 

@@ -12,7 +12,7 @@ namespace Cocos.Core.Reflection
             public Data(Type type)
             {
                 Type = type;
-                
+
                 if (type.BaseType != default)
                 {
                     BaseTypeInfo = new TypeInfo(type.BaseType);

@@ -1,11 +1,17 @@
 >>	I was working on a class that represents members of a type.
 	That type should be used within TypeInfo class.
+	Finishing the class as it should support at least Properties and Fields for now.
 
 - Add some smart reflection stuff
 	- Add some type metadata resolving
 		- Add classes to define some use cases for class members
 		+ Add a class that manages types
 			+ Add a class that manages members
+				- Properties
+				- Fields
+				- Events
+				- Constructors
+				- Methods
 
 - Add some smart networking stuff
 	- The main entrance to networking is going to be the Peer

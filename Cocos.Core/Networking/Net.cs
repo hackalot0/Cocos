@@ -61,7 +61,7 @@ namespace Cocos.Core.Networking
                     var aw = new Adapter.Windows(item);
                     winAdapters.Add(item, aw);
 
-                    var str = aw.GetPublicPropertyStrings();
+                    var str = Helper.GetPublicPropertyStrings(aw);
                 }
                 private void NetworkInterface_Remove(NetworkInterface item)
                 {
@@ -69,12 +69,8 @@ namespace Cocos.Core.Networking
                     winAdapters.Remove(item);
                 }
 
-                private void NetworkChange_NetworkAvailabilityChanged(object? sender, NetworkAvailabilityEventArgs e)
-                {
-                }
-                private void NetworkChange_NetworkAddressChanged(object? sender, EventArgs e)
-                {
-                }
+                private void NetworkChange_NetworkAvailabilityChanged(object? sender, NetworkAvailabilityEventArgs e) => Update();
+                private void NetworkChange_NetworkAddressChanged(object? sender, EventArgs e) => Update();
             }
         }
 
@@ -108,7 +104,7 @@ namespace Cocos.Core.Networking
             public abstract string Name { get; }
             public abstract string Description { get; }
 
-            private string GetDebuggerDisplay() => this.GetPublicPropertyStrings();
+            private string GetDebuggerDisplay() => Helper.GetPublicPropertyStrings(this);
         }
         public class Peer : Initializable
         {
