@@ -1,7 +1,9 @@
 ﻿using Cocos.Core.Events;
 using System.Collections;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 
 namespace Cocos.Core.Sets
 {
@@ -14,10 +16,10 @@ namespace Cocos.Core.Sets
         }
         public class Set<T> : Collection<T>, IObservable.Set<T>
         {
-            public event Sender.Event? Cleared;
-            public event Item<T>.Event? ItemAdded;
-            public event Item<T>.Event? ItemRemoved;
-            public event Item<T>.Replace.Event? ItemReplaced;
+            public event Sender.Event Cleared;
+            public event Item<T>.Event ItemAdded;
+            public event Item<T>.Event ItemRemoved;
+            public event Item<T>.Replace.Event ItemReplaced;
 
             public Options Options { get; } = new();
 
@@ -65,12 +67,12 @@ namespace Cocos.Core.Sets
                 }
             }
         }
-        public class Dict<TKey, TValue> : IDictionary<TKey, TValue>, IObservable.Dict<TKey, TValue> where TKey : notnull
+        public class Dict<TKey, TValue> : IDictionary<TKey, TValue>, IObservable.Dict<TKey, TValue>
         {
-            public event Sender.Event? Cleared;
-            public event Item<KeyValuePair<TKey, TValue>>.Event? ItemAdded;
-            public event Item<KeyValuePair<TKey, TValue>>.Event? ItemRemoved;
-            public event Item<KeyValuePair<TKey, TValue>>.Replace.Event? ItemReplaced;
+            public event Sender.Event Cleared;
+            public event Item<KeyValuePair<TKey, TValue>>.Event ItemAdded;
+            public event Item<KeyValuePair<TKey, TValue>>.Event ItemRemoved;
+            public event Item<KeyValuePair<TKey, TValue>>.Replace.Event ItemReplaced;
 
             public Options Options { get; } = new();
 
@@ -89,11 +91,11 @@ namespace Cocos.Core.Sets
             public Dict() { _idict = _dict = new(); }
             public Dict(IDictionary<TKey, TValue> dictionary) { _idict = _dict = new(dictionary); }
             public Dict(IEnumerable<KeyValuePair<TKey, TValue>> collection) { _idict = _dict = new(collection); }
-            public Dict(IEqualityComparer<TKey>? comparer) { _idict = _dict = new(comparer); }
+            public Dict(IEqualityComparer<TKey> comparer) { _idict = _dict = new(comparer); }
             public Dict(int capacity) { _idict = _dict = new(capacity); }
-            public Dict(IDictionary<TKey, TValue> dictionary, IEqualityComparer<TKey>? comparer) { _idict = _dict = new(dictionary, comparer); }
-            public Dict(IEnumerable<KeyValuePair<TKey, TValue>> collection, IEqualityComparer<TKey>? comparer) { _idict = _dict = new(collection, comparer); }
-            public Dict(int capacity, IEqualityComparer<TKey>? comparer) { _idict = _dict = new(capacity, comparer); }
+            public Dict(IDictionary<TKey, TValue> dictionary, IEqualityComparer<TKey> comparer) { _idict = _dict = new(dictionary, comparer); }
+            public Dict(IEnumerable<KeyValuePair<TKey, TValue>> collection, IEqualityComparer<TKey> comparer) { _idict = _dict = new(collection, comparer); }
+            public Dict(int capacity, IEqualityComparer<TKey> comparer) { _idict = _dict = new(capacity, comparer); }
 
             public void Clear()
             {

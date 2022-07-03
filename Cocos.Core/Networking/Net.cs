@@ -1,6 +1,9 @@
 ﻿using Cocos.Core.Sets;
+using System;
 using System.Diagnostics;
+using System.Linq;
 using System.Net.NetworkInformation;
+using System.Threading.Tasks;
 
 namespace Cocos.Core.Networking
 {
@@ -14,7 +17,7 @@ namespace Cocos.Core.Networking
             }
             public class AdapterDiscovery : Behavior
             {
-                private Observable.Dict<NetworkInterface, Adapter.Windows>? winAdapters;
+                private Observable.Dict<NetworkInterface, Adapter.Windows> winAdapters;
 
                 protected override void Init()
                 {
@@ -69,8 +72,8 @@ namespace Cocos.Core.Networking
                     winAdapters.Remove(item);
                 }
 
-                private void NetworkChange_NetworkAvailabilityChanged(object? sender, NetworkAvailabilityEventArgs e) => Update();
-                private void NetworkChange_NetworkAddressChanged(object? sender, EventArgs e) => Update();
+                private void NetworkChange_NetworkAvailabilityChanged(object sender, NetworkAvailabilityEventArgs e) => Update();
+                private void NetworkChange_NetworkAddressChanged(object sender, EventArgs e) => Update();
             }
         }
 
@@ -112,7 +115,7 @@ namespace Cocos.Core.Networking
             {
                 public class Set<T> : Observable.Set<T> where T : Item
                 {
-                    public Peer? Peer { get; init; }
+                    public Peer Peer { get; init; }
 
                     public Set()
                     {
@@ -135,7 +138,7 @@ namespace Cocos.Core.Networking
                     }
                 }
 
-                public Peer? Peer { get; protected set; }
+                public Peer Peer { get; protected set; }
 
                 public virtual void Update() { }
             }

@@ -6,7 +6,7 @@
 
         public class Args : Sender.Args
         {
-            public T? Item { get; set; }
+            public T Item { get; set; }
         }
 
         public class Replace
@@ -15,7 +15,7 @@
 
             public class Args : Item<T>.Args
             {
-                public T? NewItem { get; set; }
+                public T NewItem { get; set; }
             }
         }
     }

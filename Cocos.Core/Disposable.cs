@@ -1,11 +1,12 @@
 ﻿using Cocos.Core.Events;
+using System;
 
 namespace Cocos.Core
 {
     public abstract class Disposable : IDisposable
     {
-        public event Sender.Event? Disposing;
-        public event Sender.Event? Disposed;
+        public event Sender.Event Disposing;
+        public event Sender.Event Disposed;
 
         protected object SyncRoot { get; private set; }
 

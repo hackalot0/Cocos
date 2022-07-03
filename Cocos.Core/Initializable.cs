@@ -4,8 +4,8 @@ namespace Cocos.Core
 {
     public abstract class Initializable : Disposable, IInitializable
     {
-        public event Sender.Event? Initializing;
-        public event Sender.Event? Initialized;
+        public event Sender.Event Initializing;
+        public event Sender.Event Initialized;
 
         public bool IsInitializing { get; private set; }
         public bool IsInitialized { get; private set; }

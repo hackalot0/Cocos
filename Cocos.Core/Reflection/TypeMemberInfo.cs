@@ -4,19 +4,19 @@ namespace Cocos.Core.Reflection
 {
     public class TypeMemberInfo
     {
-        public delegate object? ValueGetter(object? instance, object?[]? index);
-        public delegate void ValueSetter(object? instance, object? value, object?[]? index);
+        public delegate object ValueGetter(object instance, object[] index);
+        public delegate void ValueSetter(object instance, object value, object[] index);
 
-        public TypeInfo Parent { get; private set; }
+        public TypeInfo Parent => TypeInfo.GetTypeInfo(MemberInfo.DeclaringType);
         public MemberInfo MemberInfo { get; private set; }
+        public MemberTypes MemberType => memberType;
 
         private MemberTypes memberType;
         private ValueGetter getter;
         private ValueSetter setter;
 
-        public TypeMemberInfo(TypeInfo parent, MemberInfo memberInfo)
+        public TypeMemberInfo(MemberInfo memberInfo)
         {
-            Parent = parent;
             MemberInfo = memberInfo;
             Init();
         }
@@ -42,7 +42,7 @@ namespace Cocos.Core.Reflection
             }
         }
 
-        public object? GetValue(object? instance = default, object?[]? index = default) => getter(instance, index);
-        public void SetValue(object? value, object? instance = default, object?[]? index = default) => setter(instance, value, index);
+        public object GetValue(object instance = default, object[] index = default) => getter(instance, index);
+        public void SetValue(object value, object instance = default, object[] index = default) => setter(instance, value, index);
     }
 }

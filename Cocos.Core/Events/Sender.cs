@@ -1,4 +1,6 @@
-﻿namespace Cocos.Core.Events
+﻿using System;
+
+namespace Cocos.Core.Events
 {
     public class Sender
     {
@@ -6,7 +8,7 @@
 
         public class Args : EventArgs
         {
-            public object? Sender { get; set; }
+            public object Sender { get; set; }
         }
     }
 }

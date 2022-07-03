@@ -1,4 +1,5 @@
 ﻿using Cocos.Core.Events;
+using System.Collections.Generic;
 
 namespace Cocos.Core.Sets
 {
@@ -8,10 +9,10 @@ namespace Cocos.Core.Sets
 
         public interface Set<T> : IObservable
         {
-            event Sender.Event? Cleared;
-            event Item<T>.Event? ItemAdded;
-            event Item<T>.Event? ItemRemoved;
-            event Item<T>.Replace.Event? ItemReplaced;
+            event Sender.Event Cleared;
+            event Item<T>.Event ItemAdded;
+            event Item<T>.Event ItemRemoved;
+            event Item<T>.Replace.Event ItemReplaced;
         }
         public interface Dict<TKey, TValue> : Set<KeyValuePair<TKey, TValue>> { }
     }
