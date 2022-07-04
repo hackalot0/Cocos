@@ -53,6 +53,12 @@ namespace Cocos.Core.Reflection
                         setter = (instance, value, _) => fieldInfo.SetValue(instance, value);
                         break;
 
+                    case EventInfo eventInfo:
+                        returnTypeInfo = new TypeInfo(eventInfo.EventHandlerType);
+                        getter = default; // Has to change to Add / Remove in future!
+                        setter = default; // Has to change to Add / Remove in future!
+                        break;
+
                     default:
                         break;
                 }
@@ -65,8 +71,9 @@ namespace Cocos.Core.Reflection
             {
                 var strList = new List<string>();
                 var memberTypeName = Enum.GetName(typeof(MemberTypes), memberType);
+                var returnTypeName = ReturnTypeInfo == default ? default : (ReturnTypeInfo.FullName ?? ReturnTypeInfo.Name);
+                if (returnTypeName != default) strList.Add($"[{returnTypeName}]");
                 if (memberTypeName != default) strList.Add($"{memberTypeName}: {Name}");
-                if (ReturnTypeInfo != default) strList.Add($"Returns {ReturnTypeInfo.Name}");
 
                 return string.Join(" | ", strList);
             }
@@ -74,6 +81,7 @@ namespace Cocos.Core.Reflection
         public class Data
         {
             public string Name => Type.Name;
+            public string FullName => Type.FullName;
 
             public Type Type { get; private set; }
             public TypeInfo BaseTypeInfo { get; private set; }
@@ -103,6 +111,7 @@ namespace Cocos.Core.Reflection
         }
 
         public string Name => data.Name;
+        public string FullName => data.FullName;
         public TypeInfo BaseTypeInfo => data.BaseTypeInfo;
         public IReadOnlyCollection<Member> MemberInfos => data.MemberInfos;
 
